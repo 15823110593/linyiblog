@@ -105,13 +105,18 @@
           document.documentElement.scrollTop = 0
         },
         getBanner() {
-          this.$axios.post('getBanner', {})
-            .then(res => {
-              if (res.code == 200) {
-                this.bannerList = res.data.list
-              }
-            })
-            .catch(err => {})
+          if (sessionStorage.getItem('bannerList')){
+            this.bannerList = JSON.parse(sessionStorage.getItem('bannerList'))
+          }else {
+            this.$axios.post('getBanner', {})
+              .then(res => {
+                if (res.code == 200) {
+                  this.bannerList = res.data.list
+                  sessionStorage.setItem('bannerList', JSON.stringify(this.bannerList))
+                }
+              })
+              .catch(err => {})
+          }
         },
       }
     }

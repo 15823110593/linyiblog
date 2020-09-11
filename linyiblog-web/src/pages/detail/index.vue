@@ -47,6 +47,7 @@
   import NewRecomond from '@/components/newRecomond'
   import FriendLinks from '@/components/friendLinks'
   import PublicAccount from '@/components/publicAccount'
+  import { Loading } from 'element-ui'
 
   export default {
       components: {
@@ -82,6 +83,7 @@
           document.documentElement.scrollTop = 0
         },
         getDetail() {
+          Loading.service({fullscreen: true})
           this.$axios.post('getDetail', {id: this.id})
             .then(res => {
               if (res.code == 200) {
@@ -90,8 +92,11 @@
                 })
                 this.details = res.data.list[0]
               }
+              Loading.service({fullscreen: true}).close()
             })
-            .catch(err => {})
+            .catch(err => {
+              Loading.service({fullscreen: true}).close()
+            })
         },
       }
     }

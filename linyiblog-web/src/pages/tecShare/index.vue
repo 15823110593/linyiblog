@@ -31,7 +31,9 @@
 <script>
   import PublicAccount from '@/components/publicAccount'
   import CardListItem from '@/components/cardListItem'
-    export default {
+  import { Loading } from 'element-ui'
+
+  export default {
       components: {
         PublicAccount,
         CardListItem
@@ -59,6 +61,7 @@
             page: this.page,
             pageSize: this.pageSize,
           }
+          Loading.service({fullscreen: true})
           this.$axios.post('getTecShare', params)
             .then(res => {
               if (res.code == 200) {
@@ -69,8 +72,11 @@
                 })
                 this.cardList = res.data.list
               }
+              Loading.service({fullscreen: true}).close()
             })
-            .catch(err => {})
+            .catch(err => {
+              Loading.service({fullscreen: true}).close()
+            })
         }
       }
     }

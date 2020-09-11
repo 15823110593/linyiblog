@@ -175,7 +175,7 @@ search = (req, res) => {
 
     let total = '';
 
-    let sql1 =` SELECT * from article where tags LIKE '%${keyWord}%' limit ?,?;`
+    let sql1 =` SELECT id,title,tags,abstract,pic,user,read_num,com_num,create_time,tec_share,study_note,book_share,casual_note from article where tags LIKE '%${keyWord}%' limit ?,?;`
     let sql2 = `SELECT COUNT(id) as total FROM article where tags LIKE '%${keyWord}%';`
 
     let callBack2 = (err, data) => {

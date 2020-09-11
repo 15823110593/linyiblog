@@ -31,6 +31,7 @@
 <script>
   import PublicAccount from '@/components/publicAccount'
   import CardListItem from '@/components/cardListItem'
+  import { Loading } from 'element-ui'
 
   export default {
     components: {
@@ -70,6 +71,7 @@
           pageSize: this.pageSize,
           keyWord: this.keyWord
         }
+        Loading.service({fullscreen: true})
         this.$axios.post('search', params)
           .then(res => {
             if (res.code == 200) {
@@ -80,8 +82,11 @@
               })
               this.cardList = res.data.list
             }
+            Loading.service({fullscreen: true}).close()
           })
-          .catch(err => {})
+          .catch(err => {
+            Loading.service({fullscreen: true}).close()
+          })
       },
     }
   }
