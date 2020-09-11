@@ -9,11 +9,11 @@ let config = {
   },
   //公司内部测试环境相关配置  运行 npm run build 打包此配置
   companyTest:{
-    port: "" //公司内部测试环境 数据接口地址
+    port: "http://114.215.82.198:3000/" //公司内部测试环境 数据接口地址
   },
   //正式生产环境相关配置    运行 npm run build pro 打包此配置
   production:{
-    port: "" //正式生产环境 数据接口地址
+    port: "http://114.215.82.198:3000/" //正式生产环境 数据接口地址
   }
 };
 export default config;

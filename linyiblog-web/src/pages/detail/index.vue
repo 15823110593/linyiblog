@@ -116,7 +116,6 @@
   .main-left{
     width: 845px;
     float: left;
-    padding: 0px 10px 10px 10px;
     .el-tag{
       margin-right: 10px;
       cursor: pointer;

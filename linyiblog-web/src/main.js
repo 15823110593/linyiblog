@@ -36,7 +36,6 @@ Vue.prototype.$moment = moment;
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
-  console.log(to)
   if (to.meta.show){
     next();
   } else {

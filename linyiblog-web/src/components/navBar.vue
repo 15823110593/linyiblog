@@ -25,16 +25,47 @@
           </el-input>
         </div>
       </el-menu-item>
-<!--      <el-menu-item index="8">-->
-<!--        <el-button @click="drawer = true">button</el-button>-->
-<!--      </el-menu-item>-->
+      <el-menu-item class="menu-item-pc-display" index="8">
+        <div @click="drawer = true">
+          <i class="el-icon-s-fold"></i>
+        </div>
+      </el-menu-item>
     </el-menu>
-<!--    <el-drawer-->
-<!--      title="我是标题"-->
-<!--      :visible.sync="drawer"-->
-<!--      :direction="direction">-->
-<!--      <span>我来啦!</span>-->
-<!--    </el-drawer>-->
+    <el-drawer
+      ref="drawer"
+      :visible.sync="drawer"
+      :direction="direction">
+  
+      <el-menu
+        :default-active="getActiveIndex"
+        @select="handleSelect"
+        class="el-menu-vertical"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b">
+        <el-menu-item index="1">
+          <span slot="title">博客首页</span>
+        </el-menu-item>
+        <el-menu-item index="2">
+          <span slot="title">技术分享</span>
+        </el-menu-item>
+        <el-menu-item index="3">
+          <span slot="title">学习笔记</span>
+        </el-menu-item>
+        <el-menu-item index="4">
+          <span slot="title">心情随笔</span>
+        </el-menu-item>
+        <el-menu-item index="5">
+          <span slot="title">书籍分享</span>
+        </el-menu-item>
+        <el-menu-item disabled index="6">
+          <span slot="title">博客留言</span>
+        </el-menu-item>
+        <el-menu-item disabled index="7">
+          <span slot="title">关于博客</span>
+        </el-menu-item>
+      </el-menu>
+    </el-drawer>
   </div>
 </template>
 
@@ -45,7 +76,7 @@
       return {
         keyWord: '',
         drawer: false,
-        direction: 'ttb',
+        direction: 'rtl',
       }
     },
     computed: {
@@ -129,6 +160,9 @@
           default:
             break;
         }
+        if (key != 8){
+          this.$refs.drawer.hide()
+        }
       },
       goSearch() {
         this.$router.push({
@@ -143,7 +177,15 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+  .el-drawer{
+    background-color: rgb(84, 92, 100) !important;
+  }
+  .nav-bar{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+  }
   .menu-container{
     height: 60px;
     max-width: 2560px;

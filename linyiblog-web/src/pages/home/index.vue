@@ -2,9 +2,9 @@
   <div class="container">
    <div class="main-left">
      <div class="slide">
-       <el-carousel arrow="always" height="350px" indicator-position="outside">
+       <el-carousel arrow="always" indicator-position="outside">
          <el-carousel-item v-for="(item, index) in bannerList" :key="index">
-           <a :href="item.link_url" target="_blank"><img :src="item.img_url"></a>
+           <a :href="item.link_url" target="_blank"><img style="width: 100%; height: auto;" :src="item.img_url"></a>
          </el-carousel-item>
        </el-carousel>
      </div>
@@ -89,7 +89,7 @@
         getTop() {
           this.$axios.post('getTop', {})
             .then(res => {
-              if (res.code == 200) {
+              if (res.code == 200 && res.data.list[0]) {
                 this.topInfo = res.data.list[0]
               }
             })

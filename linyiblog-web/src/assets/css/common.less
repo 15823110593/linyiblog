@@ -100,6 +100,10 @@ a:hover,a:active,a:focus{color:#3399CC; cursor: pointer}
   }
 }
 
+.menu-item-pc-display{
+  display: none;
+}
+
 .main-right{
   width: 260px;
   margin-left: 30px;
@@ -152,6 +156,9 @@ a:hover,a:active,a:focus{color:#3399CC; cursor: pointer}
     padding-top: 15px;
     width: 375px;
   }
+  .el-carousel__container{
+    height: 155px !important;
+  }
   .slide{
     width: 375px !important;
   }
@@ -197,6 +204,12 @@ a:hover,a:active,a:focus{color:#3399CC; cursor: pointer}
       align-items: center;
     }
   }
+  .menu-item-pc-display{
+    display: block;
+  }
+  .menu-item-display{
+    display: none;
+  }
 }
 
 @media screen and (min-width:768px) and (max-width:860px){
@@ -237,4 +250,6 @@ pre{
     font-size: 14px;
   }
 }
-
+.el-drawer{
+  background-color: rgb(84, 92, 100) !important;
+}

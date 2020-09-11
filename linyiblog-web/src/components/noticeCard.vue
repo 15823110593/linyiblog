@@ -35,7 +35,7 @@
         getNotice() {
           this.$axios.post('getNotice', {})
             .then(res => {
-              if (res.code == 200) {
+              if (res.code == 200 && res.data.list[0]) {
                 this.info = res.data.list[0]
               }
             })
