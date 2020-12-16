@@ -2,7 +2,7 @@
   <div class="container">
     <div>
       <el-menu
-        default-active="1"
+        :default-active="adminIndexActive"
         class="el-menu-vertical"
         @select="selectMunu"
         @open="handleOpen"
@@ -26,7 +26,10 @@
           <span slot="title">留言管理</span>
         </el-menu-item>
         <el-menu-item index="6">
-          <span slot="title">博客信息管理</span>
+          <span slot="title">轮播图管理</span>
+        </el-menu-item>
+        <el-menu-item index="7">
+          <span slot="title">关于博客</span>
         </el-menu-item>
       </el-menu>
     </div>
@@ -40,6 +43,7 @@
     export default {
       data() {
         return {
+          adminIndexActive: sessionStorage.getItem('adminIndexActive') ? sessionStorage.getItem('adminIndexActive') : '1',
           isCollapse: true
         };
       },
@@ -51,8 +55,12 @@
           console.log(key, keyPath);
         },
         selectMunu(e) {
+          sessionStorage.setItem('adminIndexActive', e)
           switch (e) {
             case '1':
+              this.$router.push({
+                name: 'ue'
+              })
               break;
             case '2':
               break;
@@ -65,6 +73,11 @@
             case '6':
               this.$router.push({
                 name: 'sysConfig'
+              })
+              break;
+            case '7':
+              this.$router.push({
+                name: 'about'
               })
               break;
           }

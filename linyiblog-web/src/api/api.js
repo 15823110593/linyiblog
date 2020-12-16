@@ -21,16 +21,23 @@ let api = {
   getStudyNote: 'api/getStudyNote',
   //心情随笔
   getCasualNote: 'api/getCasualNote',
-  //书籍分享
+  //每日一题
   getBookShare: 'api/getBookShare',
   //上传
   upload: 'api/upload',
   //获取banner
   getBanner: 'api/getBanner',
-
+  //获取关于我
+  getAboutMe: 'api/getAboutMe',
+  //获取关于博客
+  getAboutBlog: 'api/getAboutBlog',
   //admin
   //新增文章
-  addArticle: 'api/addArticle'
+  addArticle: 'api/addArticle',
+  //登录
+  login: 'api/login',
+  //关于我/博客
+  setAbout: 'api/setAbout'
 }
 
 export default api

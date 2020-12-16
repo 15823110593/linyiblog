@@ -76,7 +76,7 @@
           {id: 2, tec_share: '0', name: '技术分享'},
           {id: 3, study_note: '0', name: '学习笔记'},
           {id: 4, casual_note: '0', name: '心情随笔'},
-          {id: 5, book_share: '0', name: '书籍分享'},
+          {id: 5, book_share: '0', name: '每日一题'},
         ],
         init: {
           // 组件
@@ -141,9 +141,7 @@
       },
     },
     mounted() {
-      if(this.$route.query.password == '1120021'){
-        sessionStorage.setItem('isLogin', true)
-      }
+    
     }
   }
 </script>

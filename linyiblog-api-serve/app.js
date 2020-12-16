@@ -29,7 +29,7 @@ app.all('/api/*', function(req, res, next) {
     /*让options请求快速返回*/ else next()
 })
 
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ extended: true }))
 
 // view engine setup

@@ -23,6 +23,8 @@ router.post('/api/getCasualNote', home.getCasualNote)
 router.post('/api/getBookShare', home.getBookShare)
 router.post('/api/upload', upload, home.upload)
 router.post('/api/getBanner', home.getBanner)
+router.post('/api/getAboutMe', home.getAboutMe)
+router.post('/api/getAboutBlog', home.getAboutBlog)
 
 router.get('/uploads/*', function (req, res) {
     res.sendFile( '/Users/mac/Desktop/linyiblog/linyiblog-api-serve/public/' + req.url );
@@ -30,6 +32,8 @@ router.get('/uploads/*', function (req, res) {
 
 
 /*  admin page. */
+router.post('/api/login', admin.login)
 router.post('/api/addArticle', admin.addArticle)
+router.post('/api/setAbout', admin.setAbout)
 
 module.exports = router;

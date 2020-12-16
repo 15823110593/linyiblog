@@ -15,9 +15,9 @@
       <el-menu-item class="menu-item-display" index="2">技术分享</el-menu-item>
       <el-menu-item class="menu-item-display" index="3">学习笔记</el-menu-item>
       <el-menu-item class="menu-item-display" index="4">心情随笔</el-menu-item>
-      <el-menu-item class="menu-item-display" index="5">书籍分享</el-menu-item>
-      <el-menu-item disabled class="menu-item-display" index="6">博客留言</el-menu-item>
-      <el-menu-item disabled class="menu-item-display" index="7">关于博客</el-menu-item>
+      <el-menu-item class="menu-item-display" index="5">每日一题</el-menu-item>
+      <el-menu-item class="menu-item-display" index="6">博客留言</el-menu-item>
+      <el-menu-item class="menu-item-display" index="7">关于博客</el-menu-item>
       <el-menu-item class="no-hover menu-item-display">
         <div class="search">
           <el-input @keyup.enter.native="goSearch" placeholder="请输入内容" v-model="keyWord" class="input-with-select">
@@ -56,12 +56,12 @@
           <span slot="title">心情随笔</span>
         </el-menu-item>
         <el-menu-item index="5">
-          <span slot="title">书籍分享</span>
+          <span slot="title">每日一题</span>
         </el-menu-item>
         <el-menu-item disabled index="6">
           <span slot="title">博客留言</span>
         </el-menu-item>
-        <el-menu-item disabled index="7">
+        <el-menu-item index="7">
           <span slot="title">关于博客</span>
         </el-menu-item>
       </el-menu>
@@ -131,29 +131,29 @@
             this.$router.push({
               name: 'bookShare',
               query: {
-                cate: '书籍分享'
+                cate: '每日一题'
               }
             })
             this.changeActiveIndex(key)
             sessionStorage.setItem('activeIndex', key)
             break;
           case  '6':
-            // this.$router.push({
-            //   name: '',
-            //   query: {
-            //     cate: '博客留言'
-            //   }
-            // })
+            this.$router.push({
+              name: 'blogMessage',
+              query: {
+                cate: '博客留言'
+              }
+            })
             this.activeIndex = key
             sessionStorage.setItem('activeIndex', key)
             break;
           case  '7':
-            // this.$router.push({
-            //   name: '',
-            //   query: {
-            //     cate: '关于博客'
-            //   }
-            // })
+            this.$router.push({
+              name: 'blogInfo',
+              query: {
+                cate: '关于博客'
+              }
+            })
             this.activeIndex = key
             sessionStorage.setItem('activeIndex', key)
             break;

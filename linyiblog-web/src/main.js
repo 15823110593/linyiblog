@@ -36,11 +36,16 @@ Vue.prototype.$moment = moment;
 Vue.config.productionTip = false
 
 router.beforeEach((to, from, next) => {
+  let isLogin = sessionStorage.getItem('isLogin')
+  if (isLogin && to.name == 'login'){
+    next({
+      path: 'ue'
+    })
+  }
   if (to.meta.show){
     next();
   } else {
-    let isLogin = sessionStorage.getItem('isLogin')
-   if (to.query.password && to.query.password == '1120021' || isLogin){
+   if (isLogin){
      next()
    } else {
      next({

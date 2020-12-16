@@ -1,6 +1,37 @@
 var dbConfig = require('../util/dbconfig')
 let fs = require('fs');
 
+
+//登录
+login = (req, res) => {
+    let { username, password } = req.body
+    let sql = `select * from user where username=? && password=?`;
+    let sqlArr = [username, password];
+    let callBack = (err, data) => {
+        if (err){
+            console.log('用户名密码错误')
+        } else if (data.length > 0) {
+            res.send({
+                'code': 200,
+                'message': '登录成功',
+                'data': {
+                    'isLogin': true
+                }
+            })
+        }else {
+            res.send({
+                'code': 400,
+                'message': '用户名或密码错误',
+                'data': {
+                    'isLogin': false
+                }
+            })
+        }
+    }
+
+    dbConfig.sqlConnect(sql, sqlArr, callBack)
+}
+
 //新增文章
 addArticle = (req, res) => {
     let { title, abstract, tags, pic, content, user, read_num, com_num, create_time, notice_flag, top_flag, tec_share, study_note, casual_note, book_share} = req.body
@@ -52,6 +83,27 @@ addArticle = (req, res) => {
         })
     })
 }
+
+//关于我/博客
+setAbout = (req, res) => {
+    let { cate, content } = req.body
+    let sql = `update debris SET content = ? WHERE id = ? `;
+    let sqlArr = [content, cate ];
+    let callBack = (err, data) => {
+        if (err){
+            console.log('连接出错')
+        } else {
+            res.send({
+                'code': 200,
+                'message': '修改成功',
+            })
+        }
+    }
+
+    dbConfig.sqlConnect(sql, sqlArr, callBack)
+}
 module.exports = {
     addArticle,
+    login,
+    setAbout
 }

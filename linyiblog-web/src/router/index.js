@@ -11,10 +11,14 @@ const tecShare = () => import(/* webpackChunkName: 'tecShare'*/ '@/pages/tecShar
 const studyNote = () => import(/* webpackChunkName: 'studyNote'*/ '@/pages/studyNote')
 const casualNote = () => import(/* webpackChunkName: 'casualNote'*/ '@/pages/casualNote')
 const bookShare = () => import(/* webpackChunkName: 'bookShare'*/ '@/pages/bookShare')
+const blogInfo = () => import(/* webpackChunkName: 'blogInfo'*/ '@/pages/blogInfo')
+const blogMessage = () => import(/* webpackChunkName: 'blogMessage'*/ '@/pages/blogMessage')
 
 //admin
 const admin = () => import(/* webpackChunkName: 'admin'*/ '@/pages/admin/home')
+const login = () => import(/* webpackChunkName: 'login'*/ '@/pages/admin/login/login')
 const sysConfig = () => import(/* webpackChunkName: 'sysConfig'*/ '@/pages/admin/sysConfig')
+const about = () => import(/* webpackChunkName: 'about'*/ '@/pages/admin/about/about')
 
 // 解决重复点菜单报错问题
 const originalPush = Router.prototype.push
@@ -31,7 +35,7 @@ export default new Router({
     },
     {
       path: '/admin',
-      redirect: '/ue',
+      redirect: '/login',
     },
     {
       path: '/',
@@ -90,6 +94,30 @@ export default new Router({
       }
     },
     {
+      path: '/blogInfo',
+      name: 'blogInfo',
+      component: blogInfo,
+      meta: {
+        show: true
+      }
+    },
+    {
+      path: '/blogMessage',
+      name: 'blogMessage',
+      component: blogMessage,
+      meta: {
+        show: true
+      }
+    },
+    {
+      path: '/login',
+      name: 'login',
+      component: login,
+      meta: {
+        show: true
+      }
+    },
+    {
       path: '/admin',
       name: 'admin',
       component: admin,
@@ -109,6 +137,14 @@ export default new Router({
           path: '/sysConfig',
           name: 'sysConfig',
           component: sysConfig,
+          meta: {
+            show: false
+          }
+        },
+        {
+          path: '/about',
+          name: 'about',
+          component: about,
           meta: {
             show: false
           }

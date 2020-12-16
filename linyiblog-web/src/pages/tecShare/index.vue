@@ -23,6 +23,7 @@
       </div>
     </div>
     <div class="main-right">
+      <HotTagCard></HotTagCard>
       <PublicAccount></PublicAccount>
     </div>
   </div>
@@ -32,11 +33,13 @@
   import PublicAccount from '@/components/publicAccount'
   import CardListItem from '@/components/cardListItem'
   import { Loading } from 'element-ui'
+  import HotTagCard from '@/components/hotTagCard'
 
   export default {
       components: {
         PublicAccount,
-        CardListItem
+        CardListItem,
+        HotTagCard
       },
       data() {
         return{

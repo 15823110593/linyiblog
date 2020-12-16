@@ -26,7 +26,7 @@ getLinks = (req, res) => {
 //获取最新发布文章
 getArticles = (req, res) => {
 
-    let sql = "select id,title,tags,abstract,pic,tec_share,study_note,casual_note,book_share,user,read_num,com_num,create_time from article where notice_flag = 0 && top_flag = 0 Order By create_time Desc";
+    let sql = "select id,title,tags,abstract,pic,tec_share,study_note,casual_note,book_share,user,read_num,com_num,create_time from article where notice_flag = 0 Order By create_time Desc";
     let sqlArr = [];
     let callBack = (err, data) => {
         if (err){
@@ -100,7 +100,7 @@ getTags = (req, res) => {
 
 //获取最新推荐
 getNewRecommend = (req, res) => {
-    let sql = "select id,title from article where notice_flag = 0 && top_flag = 0  Order By create_time Desc";
+    let sql = "select id,title from article where notice_flag = 0  Order By create_time Desc";
     let sqlArr = [];
     let callBack = (err, data) => {
         if (err){
@@ -222,8 +222,8 @@ getTecShare = (req, res) => {
 
     let total = '';
 
-    let sql1 =` select id,title,tags,abstract,pic,tec_share,study_note,casual_note,book_share,user,read_num,com_num,create_time from article where notice_flag = 0 && top_flag = 0 && tec_share = 1  Order By create_time Desc limit ?,? ;`
-    let sql2 = `SELECT COUNT(id) as total FROM article where notice_flag = 0 && top_flag = 0 && tec_share = 1;`
+    let sql1 =` select id,title,tags,abstract,pic,tec_share,study_note,casual_note,book_share,user,read_num,com_num,create_time from article where notice_flag = 0 && tec_share = 1  Order By create_time Desc limit ?,? ;`
+    let sql2 = `SELECT COUNT(id) as total FROM article where notice_flag = 0 && tec_share = 1;`
 
     let callBack2 = (err, data) => {
         if (err){
@@ -270,8 +270,8 @@ getStudyNote = (req, res) => {
 
     let total = '';
 
-    let sql1 =` select id,title,tags,abstract,pic,tec_share,study_note,casual_note,book_share,user,read_num,com_num,create_time from article where notice_flag = 0 && top_flag = 0 && study_note = 1 Order By create_time Desc limit ?,?;`
-    let sql2 = `SELECT COUNT(id) as total FROM article where notice_flag = 0 && top_flag = 0 && study_note = 1;`
+    let sql1 =` select id,title,tags,abstract,pic,tec_share,study_note,casual_note,book_share,user,read_num,com_num,create_time from article where notice_flag = 0 && study_note = 1 Order By create_time Desc limit ?,?;`
+    let sql2 = `SELECT COUNT(id) as total FROM article where notice_flag = 0 && study_note = 1;`
 
     let callBack2 = (err, data) => {
         if (err){
@@ -318,8 +318,8 @@ getCasualNote = (req, res) => {
 
     let total = '';
 
-    let sql1 =` select id,title,tags,abstract,pic,tec_share,study_note,casual_note,book_share,user,read_num,com_num,create_time from article where notice_flag = 0 && top_flag = 0 && casual_note = 1 Order By create_time Desc limit ?,?;`
-    let sql2 = `SELECT COUNT(id) as total FROM article where notice_flag = 0 && top_flag = 0 && casual_note = 1;`
+    let sql1 =` select id,title,tags,abstract,pic,tec_share,study_note,casual_note,book_share,user,read_num,com_num,create_time from article where notice_flag = 0 && casual_note = 1 Order By create_time Desc limit ?,?;`
+    let sql2 = `SELECT COUNT(id) as total FROM article where notice_flag = 0 && casual_note = 1;`
 
     let callBack2 = (err, data) => {
         if (err){
@@ -366,8 +366,8 @@ getBookShare = (req, res) => {
 
     let total = '';
 
-    let sql1 =` select id,title,tags,abstract,pic,tec_share,study_note,casual_note,book_share,user,read_num,com_num,create_time from article where notice_flag = 0 && top_flag = 0 && book_share = 1 Order By create_time Desc limit ?,?;`
-    let sql2 = `SELECT COUNT(id) as total FROM article where notice_flag = 0 && top_flag = 0 && book_share = 1;`
+    let sql1 =` select id,title,tags,abstract,pic,tec_share,study_note,casual_note,book_share,user,read_num,com_num,create_time from article where notice_flag = 0 && book_share = 1 Order By create_time Desc limit ?,?;`
+    let sql2 = `SELECT COUNT(id) as total FROM article where notice_flag = 0 && book_share = 1;`
 
     let callBack2 = (err, data) => {
         if (err){
@@ -412,7 +412,7 @@ upload = (req, res) => {
             'content-type': 'application/json; charset=utf-8'
         });
         let { link_url, isSave } = req.body
-        let img_url = 'http://localhost:3000/uploads/' + file.originalname;
+        let img_url = 'http://114.215.82.198:3000/uploads/' + file.originalname;
         let sql = 'INSERT INTO banner VALUES (?, ?)'
         let sqlArr = [img_url, link_url];
         console.log(sqlArr)
@@ -467,6 +467,62 @@ getBanner = (req, res) => {
 
     dbConfig.sqlConnect(sql, sqlArr, callBack)
 }
+//获取关于我
+getAboutMe = (req, res) => {
+    let sql = "select * from debris where id = 1";
+    let sqlArr = [];
+    let callBack = (err, data) => {
+        if (err){
+            console.log('连接出错了')
+        } else {
+            res.send({
+                'code': 200,
+                'message': '查询成功',
+                'data': data[0]
+            })
+        }
+    }
+
+    dbConfig.sqlConnect(sql, sqlArr, callBack)
+}
+//获取关于博客
+getAboutBlog = (req, res) => {
+    let sql = "select * from debris where id = 2";
+    let sqlArr = [];
+    let callBack = (err, data) => {
+        if (err){
+            console.log('连接出错了')
+        } else {
+            res.send({
+                'code': 200,
+                'message': '查询成功',
+                'data': data[0]
+            })
+        }
+    }
+
+    dbConfig.sqlConnect(sql, sqlArr, callBack)
+}
+//getTest
+getTest = (req, res) => {
+    let sql = "select * from banner";
+    let sqlArr = [];
+    let callBack = (err, data) => {
+        if (err){
+            console.log('连接出错了')
+        } else {
+            res.send({
+                'code': 200,
+                'message': '查询成功',
+                'data': {
+                    'list': data
+                }
+            })
+        }
+    }
+
+    dbConfig.sqlConnect(sql, sqlArr, callBack)
+}
 module.exports = {
     getLinks,
     getArticles,
@@ -481,5 +537,8 @@ module.exports = {
     getCasualNote,
     getBookShare,
     upload,
-    getBanner
+    getBanner,
+    getTest,
+    getAboutMe,
+    getAboutBlog,
 }
