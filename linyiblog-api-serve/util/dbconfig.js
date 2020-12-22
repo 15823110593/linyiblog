@@ -22,7 +22,7 @@ module.exports = {
             //事件驱动回调
             conn.query(sql, sqlArr, callBack)
             //释放连接
-            conn.release();
+            pool.releaseConnection(conn)
         })
     }
 }

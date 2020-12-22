@@ -23,13 +23,17 @@
       </div>
     </div>
     <div class="main-right">
-      <HotTagCard></HotTagCard>
+      <NoticeCard></NoticeCard>
+      <FriendLinks></FriendLinks>
       <PublicAccount></PublicAccount>
     </div>
   </div>
 </template>
 
 <script>
+  import NoticeCard from '@/components/noticeCard'
+  import NewRecomond from '@/components/newRecomond'
+  import FriendLinks from '@/components/friendLinks'
   import PublicAccount from '@/components/publicAccount'
   import CardListItem from '@/components/cardListItem'
   import { Loading } from 'element-ui'
@@ -39,7 +43,10 @@
       components: {
         PublicAccount,
         CardListItem,
-        HotTagCard
+        HotTagCard,
+        NoticeCard,
+        NewRecomond,
+        FriendLinks
       },
       data() {
         return{

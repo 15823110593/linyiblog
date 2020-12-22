@@ -35,6 +35,10 @@ Vue.prototype.$moment = moment;
 
 Vue.config.productionTip = false
 
+router.afterEach((to,from,next) => {
+  window.scrollTo(0,0);
+})
+
 router.beforeEach((to, from, next) => {
   let isLogin = sessionStorage.getItem('isLogin')
   if (isLogin && to.name == 'login'){

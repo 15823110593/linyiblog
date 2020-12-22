@@ -23,22 +23,30 @@
       </div>
     </div>
     <div class="main-right">
-      <HotTagCard></HotTagCard>
+      <NoticeCard></NoticeCard>
+      <FriendLinks></FriendLinks>
       <PublicAccount></PublicAccount>
     </div>
   </div>
 </template>
 
 <script>
+  import NoticeCard from '@/components/noticeCard'
+  import HotTagCard from '@/components/hotTagCard'
+  import NewRecomond from '@/components/newRecomond'
+  import FriendLinks from '@/components/friendLinks'
   import PublicAccount from '@/components/publicAccount'
   import CardListItem from '@/components/cardListItem'
   import { Loading } from 'element-ui'
-  import HotTagCard from '@/components/hotTagCard'
 
   export default {
       components: {
         PublicAccount,
-        CardListItem
+        CardListItem,
+        NoticeCard,
+        HotTagCard,
+        NewRecomond,
+        FriendLinks
       },
       data() {
         return{

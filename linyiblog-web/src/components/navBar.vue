@@ -58,7 +58,7 @@
         <el-menu-item index="5">
           <span slot="title">每日一题</span>
         </el-menu-item>
-        <el-menu-item disabled index="6">
+        <el-menu-item index="6">
           <span slot="title">博客留言</span>
         </el-menu-item>
         <el-menu-item index="7">

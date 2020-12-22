@@ -23,17 +23,42 @@ getLinks = (req, res) => {
     dbConfig.sqlConnect(sql, sqlArr, callBack)
 }
 
-//获取最新发布文章
-getArticles = (req, res) => {
+//获取学习笔记
+getStudyNote = (req, res) => {
+    let params = {};
+    params.page = Number(req.body.page) || 1;
+    params.pageSize = Number(req.body.pageSize) || 10;
+    let { keyWord } = req.body
+    let pageSize = params.pageSize;
+    let page = (params.page - 1) * pageSize;
 
-    let sql = "select id,title,tags,abstract,pic,tec_share,study_note,casual_note,book_share,user,read_num,com_num,create_time from article where notice_flag = 0 Order By create_time Desc";
-    let sqlArr = [];
+    let sqlArr1 = [page, pageSize];
+    let sqlArr2 = [];
+
+    let total = '';
+
+    let sql1 =` select id,title,tags,abstract,pic,tec_share,study_note,casual_note,book_share,user,read_num,com_num,create_time from article where notice_flag = 0 && study_note = 1 Order By create_time Desc limit ?,?;`
+    let sql2 = `SELECT COUNT(id) as total FROM article where notice_flag = 0 && study_note = 1;`
+
+    let callBack2 = (err, data) => {
+        if (err){
+            console.log('连接出错了')
+        } else {
+            console.log(data)
+            total = data[0].total
+            dbConfig.sqlConnect(sql1, sqlArr1, callBack)
+        }
+    }
+
     let callBack = (err, data) => {
         if (err){
             console.log('连接出错了')
         } else {
             res.send({
                 'code': 200,
+                'page': params.page,
+                'pageSize': pageSize,
+                'total': total,
                 'message': '查询成功',
                 'data': {
                     'list': data
@@ -42,7 +67,53 @@ getArticles = (req, res) => {
         }
     }
 
-    dbConfig.sqlConnect(sql, sqlArr, callBack)
+    dbConfig.sqlConnect(sql2, sqlArr2, callBack2)
+
+}
+
+//获取最新发布文章
+getArticles = (req, res) => {
+    let params = {};
+    params.page = Number(req.body.page) || 1;
+    params.pageSize = Number(req.body.pageSize) || 10;
+    let pageSize = params.pageSize;
+    let page = (params.page - 1) * pageSize;
+
+    let sqlArr1 = [page, pageSize];
+    let sqlArr2 = [];
+    let total = '';
+
+    let sql1 = "select id,title,tags,abstract,pic,tec_share,study_note,casual_note,book_share,user,read_num,com_num,create_time from article where notice_flag = 0 Order By create_time Desc limit ?,?";
+    let sql2 = `SELECT COUNT(id) as total FROM article where notice_flag = 0`;
+
+    let callBack2 = (err, data) => {
+        if (err){
+            console.log('连接出错了')
+        } else {
+            console.log(data)
+            total = data[0].total
+            dbConfig.sqlConnect(sql1, sqlArr1, callBack)
+        }
+    }
+
+    let callBack = (err, data) => {
+        if (err){
+            console.log('连接出错了')
+        } else {
+            res.send({
+                'code': 200,
+                'page': params.page,
+                'pageSize': pageSize,
+                'total': total,
+                'message': '查询成功',
+                'data': {
+                    'list': data
+                }
+            })
+        }
+    }
+
+    dbConfig.sqlConnect(sql2, sqlArr2, callBack2)
 }
 
 //获取最新发布文章详情
@@ -100,7 +171,7 @@ getTags = (req, res) => {
 
 //获取最新推荐
 getNewRecommend = (req, res) => {
-    let sql = "select id,title from article where notice_flag = 0  Order By create_time Desc";
+    let sql = "select id,title from article where notice_flag = 0  Order By create_time Desc limit 0,10";
     let sqlArr = [];
     let callBack = (err, data) => {
         if (err){
@@ -175,8 +246,8 @@ search = (req, res) => {
 
     let total = '';
 
-    let sql1 =` SELECT id,title,tags,abstract,pic,user,read_num,com_num,create_time,tec_share,study_note,book_share,casual_note from article where tags LIKE '%${keyWord}%' limit ?,?;`
-    let sql2 = `SELECT COUNT(id) as total FROM article where tags LIKE '%${keyWord}%';`
+    let sql1 =` SELECT id,title,tags,abstract,pic,user,read_num,com_num,create_time,tec_share,study_note,book_share,casual_note from article where title LIKE '%${keyWord}%' limit ?,?;`
+    let sql2 = `SELECT COUNT(id) as total FROM article where title LIKE '%${keyWord}%';`
 
     let callBack2 = (err, data) => {
         if (err){
@@ -256,53 +327,6 @@ getTecShare = (req, res) => {
 
 }
 
-//获取学习笔记
-getStudyNote = (req, res) => {
-    let params = {};
-    params.page = Number(req.body.page) || 1;
-    params.pageSize = Number(req.body.pageSize) || 10;
-    let { keyWord } = req.body
-    let pageSize = params.pageSize;
-    let page = (params.page - 1) * pageSize;
-
-    let sqlArr1 = [page, pageSize];
-    let sqlArr2 = [];
-
-    let total = '';
-
-    let sql1 =` select id,title,tags,abstract,pic,tec_share,study_note,casual_note,book_share,user,read_num,com_num,create_time from article where notice_flag = 0 && study_note = 1 Order By create_time Desc limit ?,?;`
-    let sql2 = `SELECT COUNT(id) as total FROM article where notice_flag = 0 && study_note = 1;`
-
-    let callBack2 = (err, data) => {
-        if (err){
-            console.log('连接出错了')
-        } else {
-            console.log(data)
-            total = data[0].total
-            dbConfig.sqlConnect(sql1, sqlArr1, callBack)
-        }
-    }
-
-    let callBack = (err, data) => {
-        if (err){
-            console.log('连接出错了')
-        } else {
-            res.send({
-                'code': 200,
-                'page': params.page,
-                'pageSize': pageSize,
-                'total': total,
-                'message': '查询成功',
-                'data': {
-                    'list': data
-                }
-            })
-        }
-    }
-
-    dbConfig.sqlConnect(sql2, sqlArr2, callBack2)
-
-}
 
 //获取心情随笔
 getCasualNote = (req, res) => {

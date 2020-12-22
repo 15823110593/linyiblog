@@ -29,6 +29,16 @@
           <template v-for="(item, index) in cardList">
             <CardListItem :data="item"></CardListItem>
           </template>
+         <div>
+           <el-pagination
+             @current-change="handleCurrentChange"
+             background
+             layout="total, prev, pager, next"
+             :page-size="pageSize"
+             :current-page.sync="page"
+             :total="total">
+           </el-pagination>
+         </div>
        </div>
      </el-card>
      
@@ -64,7 +74,10 @@
         return {
           bannerList: [],
           cardList: [],
-          topInfo: {}
+          topInfo: {},
+          pageSize: 10,
+          page: 1,
+          total: 0,
         }
       },
       mounted(){
@@ -74,10 +87,20 @@
         this.getBanner()
       },
       methods: {
+        handleCurrentChange(e) {
+          this.page = e
+          this.getArticles()
+        },
         getArticles() {
-          this.$axios.post('getArticles', {})
+          let params = {
+            page: this.page,
+            pageSize: this.pageSize,
+          }
+          this.$axios.post('getArticles', params)
             .then(res => {
               if (res.code == 200) {
+                this.page = res.page
+                this.total = res.total
                 res.data.list.forEach( item => {
                   item.tags = item.tags.split(',')
                 })
